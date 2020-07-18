@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<!--Quiz box-->
+    <div class = "container">
+        <div id = "questionBox" class="hide">
+        <div id = "question">Question</div>
+        <div id = "answer-box" class = "btn-grid">
+            <button class = "btn">Answer1</button>
+            <button class = "btn">Answer2</button>
+            <button class = "btn">Answer3</button>
+            <button class = "btn">Answer4</button>
+        </div>
+        </div>
+<!--Controls for quiz-->
+        <div class = "controls">
+            <button id= "start-btn" class="start-btn btn">START</button>
+            <button id= "next-btn" class="next-btn btn hide">NEXT</button>
+
+        </div>
+    </div>
+    <span> id ="timer"></span>
+    <script>var questions = [
+        {
+              prompt: "What are the three building blocks of the web?\n(a) memes, videos, conspiracies\n(b) HTML, CSS, JS\n",
+              answer: "b"//
+        },
+        {
+             prompt: "What does the getElementsByTagName allow you to do?\n(a) change the name of an element\n(b) select elements using their tag name\n(c) get the tag of an id",
+             answer: "b"//
+        },
+        {
+             prompt: "What do functions allow you to do?\n(a) compare date\n(b) group a set of related statements together that represent a single task.\n(c) group a set of strings to set off an event",
+             answer: "b"// 
+        }
+    ];
+    var score = 0;
+    
+    
+    for(var i = 0; i < questions.length; i++){
+        var response = window.prompt(questions[i].prompt);
+        if(response == questions[i].answer){
+             score++;
+             alert("Correct!");
+        } else {
+             alert("WRONG!");
+        }
+    }
+    alert("you got " + score + "/" + questions.length);</script>
+</body>
+</html>
