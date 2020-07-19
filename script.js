@@ -36,7 +36,7 @@ const answerButtonsElement = document.getElementById("answer-box");
 //learned this one in a facebook group
 let shuffledQuestions, currentQuestionIndex;
 
-startButton.addEventListener("click", startGame);
+startButton.addEventListener("click", startQuiz);
 
 
 nextButton.addEventListener("click", () => {
