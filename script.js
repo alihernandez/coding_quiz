@@ -6,29 +6,29 @@ const answerButtonsElement = document.getElementById("answer-box");
 
 //timer
 
-var timerId;
-var timeEl = document.getElementById("timer");
-var time = 120;
+//var timerId;
+//var timeEl = document.getElementById("timer");
+//var time = 120;
 
-function startTimer(){
-    timerId = setInterval(clockTick , 1000);
-    
-}
+//function startTimer(){
+//    timerId = setInterval(clockTick , 1000);
+//    
+//}
+//
+//function clockTick(){
+//    time--;
+//    timeEl.textContent= time;
+//    if (time <= 0) {
+//        stopTimer()
+//
+//    }
+//};
 
-function clockTick(){
-    time--;
-    timeEl.textContent= time;
-    if (time <= 0) {
-        stopTimer()
+//function stopTimer(){
+//    clearInterval(timerId);
+//};
 
-    }
-};
-
-function stopTimer(){
-    clearInterval(timerId);
-};
-
-startTimer()
+//startTimer()
 
 
 
@@ -44,7 +44,7 @@ nextButton.addEventListener("click", () => {
   setNextQuestion();
 });
 
-function startGame() {
+function startQuiz() {
   console.log("Started");
   startButton.classList.add("hide");
   shuffledQuestions = questions.sort(() => Math.random() - 0.5);
