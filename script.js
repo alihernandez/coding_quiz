@@ -4,33 +4,41 @@ const questionBox = document.getElementById("questionBox");
 const questionElement = document.getElementById("question");
 const answerButtonsElement = document.getElementById("answer-box");
 
-//worked though this with tutor
+//timer
+
 var timerId;
 var timeEl = document.getElementById("timer");
 var time = 120;
 
-function startTimer() {
-  timerId = setInterval(clockTick, 1000);
+function startTimer(){
+    timerId = setInterval(clockTick , 1000);
+    
 }
 
-function clockTick() {
-  time--;
-  timeEl.textContent = time;
-  if (time <= 0) {
-    stopTimer();
-  }
-}
+function clockTick(){
+    time--;
+    timeEl.textContent= time;
+    if (time <= 0) {
+        stopTimer()
 
-function stopTimer() {
-  clearInterval(timerId);
-}
+    }
+};
 
-startTimer();
+function stopTimer(){
+    clearInterval(timerId);
+};
+
+startTimer()
+
+
+
 
 //learned this one in a facebook group
 let shuffledQuestions, currentQuestionIndex;
 
 startButton.addEventListener("click", startGame);
+
+
 nextButton.addEventListener("click", () => {
   currentQuestionIndex++;
   setNextQuestion();
@@ -178,8 +186,8 @@ var questions = [
 ];
 
 for(var i = 0; i < questions.length; i++){
- var answer = window.answer(questions[i].prompt);
-if(answer == questions[i].answer){
+ var answer = document.answers(questions[i].prompt);
+if(text === true){
 score++;
 alert("Correct!");
 } else {
@@ -189,6 +197,9 @@ alert("WRONG!");
 alert("you got " + score + "/" + questions.length);
 
 var score = 0;
+
+
+// I got this to work but it's super basic and I couldn't in good consious half ass it like this....
 
 //var questions = [
 //{
