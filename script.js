@@ -4,6 +4,29 @@ const questionBox = document.getElementById("questionBox");
 const questionElement = document.getElementById("question");
 const answerButtonsElement = document.getElementById("answer-box");
 
+//worked though this with tutor
+var timerId;
+var timeEl = document.getElementById("timer");
+var time = 120;
+
+function startTimer() {
+  timerId = setInterval(clockTick, 1000);
+}
+
+function clockTick() {
+  time--;
+  timeEl.textContent = time;
+  if (time <= 0) {
+    stopTimer();
+  }
+}
+
+function stopTimer() {
+  clearInterval(timerId);
+}
+
+startTimer();
+
 //learned this one in a facebook group
 let shuffledQuestions, currentQuestionIndex;
 
@@ -78,7 +101,7 @@ function clearStatusClass(element) {
   element.classList.remove("wrong");
 }
 
-const questions = [
+var questions = [
   {
     question: "What are the three building blocks of the web?",
     answers: [
@@ -100,7 +123,7 @@ const questions = [
   {
     question: "What do functions allow you to do?",
     answers: [
-      { text: "Group a set of related statements together that represent a single task", Correct: true },
+      {text:"Group a set of related statements together that represent a single task", Correct: true,},
       { text: "Code whilest hungover", Correct: false },
       { text: "Compare a set of strings", Correct: false },
       { text: "Change the look of a web page", Correct: false },
@@ -153,6 +176,17 @@ const questions = [
     ],
   },
 ];
+
+for(var i = 0; i < questions.length; i++){
+ var answer = window.answer(questions[i].prompt);
+if(answer == questions[i].answer){
+score++;
+alert("Correct!");
+} else {
+alert("WRONG!");
+ }
+}
+alert("you got " + score + "/" + questions.length);
 
 var score = 0;
 
