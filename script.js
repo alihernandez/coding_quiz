@@ -3,41 +3,47 @@ const nextButton = document.getElementById("next-btn");
 const questionBox = document.getElementById("questionBox");
 const questionElement = document.getElementById("question");
 const answerButtonsElement = document.getElementById("answer-box");
+let score = 0;
+
+
 
 //timer
 
-//var timerId;
-//var timeEl = document.getElementById("timer");
-//var time = 120;
+var timerId;
+var timeEl = document.getElementById("timer");
+var time = 40;
 
-//function startTimer(){
-//    timerId = setInterval(clockTick , 1000);
-//    
-//}
-//
-//function clockTick(){
-//    time--;
-//    timeEl.textContent= time;
-//    if (time <= 0) {
-//        stopTimer()
-//
-//    }
-//};
 
-//function stopTimer(){
-//    clearInterval(timerId);
-//};
+function startTimer(){
+    timerId = setInterval(clockTick , 1000);
 
-//startTimer()
+}
 
+function clockTick(){
+    time--;
+    timeEl.textContent= time;
+    if (time <= 0) {
+        stopTimer()
+
+    }
+};
+
+function decreaseTimer(){
+    time = time - 5;
+  };
 
 
 
-//learned this one in a facebook group
+function stopTimer(){
+    clearInterval(timerId);
+};
+
+startTimer()
+
+//learned this one in a facebook group randomizes the order of questions
 let shuffledQuestions, currentQuestionIndex;
 
 startButton.addEventListener("click", startQuiz);
-
 
 nextButton.addEventListener("click", () => {
   currentQuestionIndex++;
@@ -64,8 +70,8 @@ function showQuestion(question) {
     const button = document.createElement("button");
     button.innerText = answer.text;
     button.classList.add("btn");
-    if (answer.corret) {
-      button.dataset.correct = answer.correct;
+    if (answer.correct) {
+      button.classList.add("correct");
     }
     button.addEventListener("click", selectAnswer);
     answerButtonsElement.appendChild(button);
@@ -82,7 +88,13 @@ function resetState() {
 
 function selectAnswer(e) {
   const selectedButton = e.target;
-  const correct = selectedButton.dataset.correct;
+  const correct = selectedButton.classList.contains("correct");
+  console.log(correct)
+  if (correct){
+    score++
+  } else {
+    decreaseTimer()
+  }
   setStatusClass(document.body, correct);
   Array.from(answerButtonsElement.children).forEach((button) => {
     setStatusClass(button, button.dataset.correct);
@@ -90,7 +102,7 @@ function selectAnswer(e) {
   if (shuffledQuestions.length > currentQuestionIndex + 1) {
     nextButton.classList.remove("hide");
   } else {
-    startButton.innerText = "Restart";
+    startButton.innerText = "your score: " + score;
     startButton.classList.remove("hide");
   }
 }
@@ -109,94 +121,89 @@ function clearStatusClass(element) {
   element.classList.remove("wrong");
 }
 
+
 var questions = [
   {
     question: "What are the three building blocks of the web?",
     answers: [
-      { text: "HTML, CSS, JS", Correct: true },
-      { text: "memes, videos, conspiracies", Correct: false },
-      { text: "fake news, political bs, spam", Correct: false },
-      { text: "ruby, react, python", Correct: false },
+      { text: "HTML, CSS, JS", correct: true },
+      { text: "memes, videos, conspiracies", correct: false },
+      { text: "fake news, political bs, spam", correct: false },
+      { text: "ruby, react, python", correct: false },
     ],
   },
   {
     question: "What does the getElementsByTagName allow you to do",
     answers: [
-      { text: "Select elements by their tag name", Correct: true },
-      { text: "Pull user elements", Correct: false },
-      { text: "Take user to a different part of the page", Correct: false },
-      { text: "Reset elements", Correct: false },
+      { text: "Select elements by their tag name", correct: true },
+      { text: "Pull user elements", correct: false },
+      { text: "Take user to a different part of the page", correct: false },
+      { text: "Reset elements", correct: false },
     ],
   },
   {
     question: "What do functions allow you to do?",
     answers: [
-      {text:"Group a set of related statements together that represent a single task", Correct: true,},
-      { text: "Code whilest hungover", Correct: false },
-      { text: "Compare a set of strings", Correct: false },
-      { text: "Change the look of a web page", Correct: false },
+      {
+        text:
+          "Group a set of related statements together that represent a single task",
+        correct: true,
+      },
+      { text: "Code whilest hungover", correct: false },
+      { text: "Compare a set of strings", correct: false },
+      { text: "Change the look of a web page", correct: false },
     ],
   },
   {
     question: "In what element do you insert Javascript?",
     answers: [
-      { text: "<script>", Correct: true },
-      { text: "<head>", Correct: false },
-      { text: "<style>", Correct: false },
-      { text: "<a href>", Correct: false },
+      { text: "<script>", correct: true },
+      { text: "<head>", correct: false },
+      { text: "<style>", correct: false },
+      { text: "<a href>", correct: false },
     ],
   },
   {
     question: 'What does "document represent in "document.write("good luck!")?',
     answers: [
-      { text: "Entire web page", Correct: true },
-      { text: "Main section of web page", Correct: false },
-      { text: "A side article", Correct: false },
-      { text: "The web address", Correct: false },
+      { text: "Entire web page", correct: true },
+      { text: "Main section of web page", correct: false },
+      { text: "A side article", correct: false },
+      { text: "The web address", correct: false },
     ],
   },
   {
     question:
       "What is the way we write multiple words in the name of a variable called?",
     answers: [
-      { text: "camelCase", Correct: true },
-      { text: "cobraCase", Correct: false },
-      { text: "turtleCase", Correct: false },
-      { text: "lammaCase", Correct: false },
+      { text: "camelCase", correct: true },
+      { text: "cobraCase", correct: false },
+      { text: "turtleCase", correct: false },
+      { text: "lammaCase", correct: false },
     ],
   },
   {
     question: "What are true or false values known as?",
     answers: [
-      { text: "Booleans", Correct: true },
-      { text: "Jooleans", Correct: false },
-      { text: "Dasleans", Correct: false },
-      { text: "Dataleans", Correct: false },
+      { text: "Booleans", correct: true },
+      { text: "Jooleans", correct: false },
+      { text: "Dasleans", correct: false },
+      { text: "Dataleans", correct: false },
     ],
   },
   {
     question: "What is Jay's favorite food to use in his coding examples?",
     answers: [
-      { text: "Tacos", Correct: true },
-      { text: "Cheeseburgers", Correct: false },
-      { text: "Sushi", Correct: false },
-      { text: "Gansitos", Correct: false },
+      { text: "Tacos", correct: true },
+      { text: "Cheeseburgers", correct: false },
+      { text: "Sushi", correct: false },
+      { text: "Gansitos", correct: false },
     ],
   },
 ];
 
-for(var i = 0; i < questions.length; i++){
- var answer = document.answers(questions[i].prompt);
-if(text === true){
-score++;
-alert("Correct!");
-} else {
-alert("WRONG!");
- }
-}
-alert("you got " + score + "/" + questions.length);
 
-var score = 0;
+
 
 
 // I got this to work but it's super basic and I couldn't in good consious half ass it like this....
@@ -220,9 +227,9 @@ var score = 0;
 // var response = window.prompt(questions[i].prompt);
 //if(response == questions[i].answer){
 //score++;
-//alert("Correct!");
+//alert("correct!");
 //} else {
 //alert("WRONG!");
 // }
 //}
-//alert("you got " + score + "/" + questions.length);
+//alert("you got " + score + "/" + questions.length

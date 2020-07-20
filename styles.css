@@ -38,3 +38,8 @@ body {
     display: none;
 }
 
+header {
+    text-align: center;
+    font-family: 'Libre Barcode 128 Text', cursive;
+    font-size: 50px;
+}
