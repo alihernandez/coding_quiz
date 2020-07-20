@@ -205,7 +205,6 @@ var questions = [
 
 
 
-
 // I got this to work but it's super basic and I couldn't in good consious half ass it like this....
 
 //var questions = [
