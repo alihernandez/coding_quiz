@@ -38,7 +38,7 @@ function stopTimer(){
     clearInterval(timerId);
 };
 
-startTimer()
+
 
 //learned this one in a facebook group randomizes the order of questions
 let shuffledQuestions, currentQuestionIndex;
@@ -53,6 +53,7 @@ nextButton.addEventListener("click", () => {
 function startQuiz() {
   console.log("Started");
   startButton.classList.add("hide");
+  startTimer()
   shuffledQuestions = questions.sort(() => Math.random() - 0.5);
   currentQuestionIndex = 0;
   questionBox.classList.remove("hide");
@@ -121,6 +122,8 @@ function clearStatusClass(element) {
   element.classList.remove("wrong");
 }
 
+// function checkanswer
+  
 
 var questions = [
   {
